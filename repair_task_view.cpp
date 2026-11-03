@@ -18,8 +18,7 @@ struct RepairTask
 };
 
 bool comesBeforeOrEqual(const RepairTask *left, const RepairTask *right);
-void mergeTaskView(RepairTask *view[], RepairTask *temporary[],
-                   int first, int middle, int last);
+void mergeTaskView(RepairTask *view[], RepairTask *temporary[], int first, int middle, int last);
 void mergeSortView(RepairTask *view[], RepairTask *temporary[], int first, int last);
 void displayOriginal(const RepairTask tasks[], int count);
 void displayView(RepairTask *view[], int count);
@@ -60,8 +59,13 @@ int main()
 
     // ===== Resolve these TODOs later (Part D) =====
     // TODO (Part D): Call mergeSortView for the complete logical range.
+    mergeSortView(view, temporary, 0, TASK_COUNT - 1);
     // TODO (Part D): Display the sorted view with a descriptive heading.
+    cout << "Sorted by deadline and duration:" << endl;
+    displayView(view, TASK_COUNT);
     // TODO (Part D): Display tasks again to prove that arrival order did not change.
+    cout << "Original arrival order (unchanged):" << endl;
+    displayOriginal(tasks, TASK_COUNT);
 
     return 0;
 }
@@ -88,13 +92,58 @@ bool comesBeforeOrEqual(const RepairTask *left, const RepairTask *right)
 void mergeSortView(RepairTask *view[], RepairTask *temporary[], int first, int last)
 {
     // TODO (Part D): Implement recursive merge sort using inclusive indices.
+    if (first < last)
+    {
+         int middle = first + (last - first) / 2;
+        mergeSortView(view, temporary, first, middle);
+        mergeSortView(view, temporary, middle + 1, last);
+        mergeTaskView(view, temporary, first, middle, last);
+
+    }
 }
 
-void mergeTaskView(RepairTask *view[], RepairTask *temporary[],
-                   int first, int middle, int last)
+void mergeTaskView(RepairTask *view[], RepairTask *temporary[],int first, int middle, int last)
 {
     // TODO (Part D): Merge two sorted segments using comesBeforeOrEqual.
     // TODO (Part D): Preserve pending pointers and copy the merged segment back.
+    int left = first;
+    int right = middle + 1;
+    int index = first;
+
+    while (left <= middle && right <= last)
+    {
+        if (comesBeforeOrEqual(view[left], view[right]))
+        {
+            temporary[index] = view[left];
+            left++;
+        }
+        else
+        {
+            temporary[index] = view[right];
+            right++;
+        }
+        index++;
+    }
+
+    while (left <= middle)
+    {
+        temporary[index] = view[left];
+        left++;
+        index++;
+    }
+
+    while (right <= last)
+    {
+        temporary[index] = view[right];
+        right++;
+        index++;
+    }
+
+    for (int count = first; count <= last; count ++)
+    {
+        view[count] = temporary[count];
+    }
+
 }
 
 void displayOriginal(const RepairTask tasks[], int count)
