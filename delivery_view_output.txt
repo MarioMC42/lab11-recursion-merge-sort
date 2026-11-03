@@ -1,0 +1,15 @@
+Original orders before building view: 
+Order ID: 101 | Priority: 3 | Type: Delivery | Status: Pending | Building: A
+Order ID: 102 | Priority: 1 | Type: Dine-in | Status: In Progress | Building: B
+Order ID: 103 | Priority: 2 | Type: Delivery | Status: Pending | Building: C
+Order ID: 104 | Priority: 1 | Type: Delivery | Status: Completed | Building: D
+
+Selected View (Delivery active only): 
+Order ID: 101 | Status: Pending | Building: A
+Order ID: 103 | Status: Pending | Building: C
+
+Original orders after building view:
+Order ID: 101 | Priority: 3 | Type: Delivery | Status: Pending | Building: A
+Order ID: 102 | Priority: 1 | Type: Dine-in | Status: In Progress | Building: B
+Order ID: 103 | Priority: 2 | Type: Delivery | Status: Pending | Building: C
+Order ID: 104 | Priority: 1 | Type: Delivery | Status: Completed | Building: D

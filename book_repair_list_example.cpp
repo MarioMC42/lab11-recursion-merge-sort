@@ -3,7 +3,7 @@
  * Name: Mario A. Marrero Colón
  * Lab: Lab 11 - Recursion and Merge Sort
  * Description: Guided example - recursive total and linked-list merge sort
- * Due date: 04/nov/2526
+ * Due date: 04/nov/2026
  */
 
 #include <iostream>
