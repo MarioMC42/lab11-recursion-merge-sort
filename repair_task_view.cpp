@@ -177,17 +177,25 @@ void displayView(RepairTask *view[], int count)
  * D1 - Recursive ranges
  * Show first, last, middle, and the base-case evaluations along the first branch
  * starting at 0..7. Identify where execution resumes after the call for 0..0.
- * Answer:
+ * Answer: Starting with first = 0 and last = 7, middle = 3. The left calls are
+ * 0..3 (middle 1), 0..1 (middle 0), and 0..0 (base case: 0 < 0 is false).
+ * After the 0..0 call returns, execution continues with the call for 1..1,
+ * which is also a base case, then merges 0..1.
  *
  * D2 - Stable ties
  * Identify both pairs of tasks that tie in the two sort fields. Explain how the
  * comparator and the merge preserve their arrival order.
- * Answer:
+ * Answer: RT-102 and RT-107 tie at (1 day, 20 minutes); RT-103 and RT-105 tie
+ * at (2 days, 15 minutes). The comparator returns true for exact ties, so the
+ * merge takes the left pointer first and preserves their arrival order.
  *
  * D3 - Time, space, and original data
  * Give the sorting time and auxiliary-space order of this pointer-array version.
  * Compare with the linked-list sort in Part B and explain why the original task
  * storage order is preserved here but the node order changes in Part B.
- * Answer:
+ * Answer: The sort takes O(log n) time and uses O(n) auxiliary space for the
+ * temporary pointer array (plus O(log n) recursion stack). It reorders only
+ * pointers in view, leaving the tasks array unchanged. The linked-list sort
+ * changes node order by relinking nodes.
  *
  */
